@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">login</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_registrazione">registrazione</string>
+    <string name="title_activity_body_app">BodyApp</string>
+    <string name="title_activity_bodyof_app">BodyofApp</string>
+
+
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="home">Home</string>
+    <string name="premio">Premio</string>
+    <string name="obiettivo">Obiettivo</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_obiettivo_scelto">obiettivoScelto</string>
+    <string name="title_activity_examplegoogle">examplegoogle</string>
+    <string name="title_activity_es2">es2</string>
+    <string name="title_activity_notifica">Notifica</string>
+    <string name="title_activity_service2">Service2</string>
+    <string name="title_activity_es3">es3</string>
+    <string name="title_activity_swipe_view">SwipeView</string>
+    <string name="title_activity_home_swipe">HomeSwipe</string>
+    <string name="title_activity_vicinanza">Vicinanza</string>
+    <string name="title_activity_consigliati">Consigliati</string>
+    <string name="title_activity_ricerca">Ricerca</string>
+    <string name="title_activity_take_json">takeJson</string>
+    <string name="title_activity_broad_cast">broadCast</string>
+    <string name="title_activity_es5">es5</string>
+</resources>
