@@ -1,0 +1,215 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/sfondo"
+    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/sfondo"
+    android:id="@+id/tutto"
+    >
+    <LinearLayout
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+        <ImageView
+            android:rotation="30"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:id="@+id/textView"
+            android:layout_weight="1"
+            android:src="@drawable/applogo"/>
+        <ImageView
+            android:rotation="30"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:id="@+id/textView2"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_alignBottom="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+        <ImageView
+            android:rotation="30"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:id="@+id/textView3"
+            android:layout_weight="1"/>
+        <ImageView
+            android:rotation="30"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:id="@+id/textView4"
+            android:layout_weight="1"
+            android:src="@drawable/applogo"/>
+    </LinearLayout>
+
+    <EditText
+        android:paddingLeft="5dp"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/login"
+        android:hint="Username"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/username"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="67dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:inputType="text"/>
+
+    <EditText
+        android:paddingLeft="5dp"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/login"
+        android:hint="Password"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/password"
+        android:layout_alignRight="@+id/username"
+        android:layout_alignEnd="@+id/username"
+        android:layout_below="@+id/username"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*"
+        android:id="@+id/login_pasw_error"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffff0005"
+        android:layout_alignTop="@+id/username"
+        android:layout_alignLeft="@+id/login_username_error"
+        android:layout_alignStart="@+id/login_username_error"
+        android:visibility="invisible"/>
+
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*"
+        android:id="@+id/login_username_error"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/username"
+        android:textColor="#ffff0005"
+        android:visibility="invisible"/>
+
+    <Button
+        android:textSize="20sp"
+        android:shadowColor="#000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:background="@drawable/bottone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOGIN"
+        android:id="@+id/login"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/checkBox"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:shadowColor="#ff000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ricorda password"
+        android:id="@+id/checkBox"
+        android:layout_below="@+id/password"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:button="@xml/custom_checkbox"/>
+
+    <Button
+        android:textSize="20sp"
+        android:shadowColor="#000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:background="@drawable/crea_azienda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="crea account azienda"
+        android:id="@+id/crea_account_azienda"
+        android:layout_below="@+id/login"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="77dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"/>
+
+    <Button
+        android:textSize="20sp"
+        android:shadowColor="#000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:background="@drawable/crea_utente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="crea account utente"
+        android:id="@+id/crea_account_utente"
+        android:layout_below="@+id/facebook"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/login"
+        android:layout_alignEnd="@+id/login" />
+
+    <Button
+        android:textSize="20sp"
+        android:shadowColor="#000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:background="@drawable/crea_azienda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOGIN CON FACEBOOK"
+        android:id="@+id/facebook"
+        android:layout_below="@+id/login"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>
+</ScrollView>

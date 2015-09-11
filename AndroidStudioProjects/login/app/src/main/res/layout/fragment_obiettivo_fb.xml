@@ -1,0 +1,95 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sfondofb"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="6dp"
+    android:id="@+id/tab1"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linea"
+        android:layout_marginTop="4dp">
+
+        <EditText
+            android:layout_weight="0.25"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:id="@+id/cerca"
+            android:hint="Cerca"
+            android:paddingLeft="5dp"
+            android:inputType="text"
+            android:background="@drawable/login"
+            android:textSize="18sp"/>
+
+        <Button
+            android:layout_weight="0.75"
+            android:background="@drawable/crea_azienda"
+            android:textSize="18sp"
+            android:shadowColor="#000000"
+            android:shadowDx="1.9"
+            android:shadowDy="1.5"
+            android:shadowRadius="3.0"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="cerca"
+            android:id="@+id/ricerca"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/linea"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bordo"
+        android:id="@+id/scroll">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:id="@+id/superlineas">
+            <ExpandableListView
+                android:id="@+id/expand"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <CheckBox
+        android:visibility="gone"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="completati"
+        android:id="@+id/checkBox2"
+        android:layout_below="@+id/linea"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:button="@xml/custom_checkbox"
+        android:checked="true"/>
+
+    <CheckBox
+        android:visibility="gone"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="non completati"
+        android:id="@+id/checkBox3"
+        android:button="@xml/custom_checkbox"
+        android:checked="true"
+        android:layout_below="@+id/linea"
+        android:layout_alignRight="@+id/linea"
+        android:layout_alignEnd="@+id/linea" />
+</RelativeLayout>

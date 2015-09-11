@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DiscountWalk</string>
+    <string name="app_id">1612497275669488</string>
+    <string name="logout">Logout</string>
+    <string name="login">Login</string>
+    <string name="get_friends">Get friends</string>
+    <string name="load_more">load more...</string>
+</resources>

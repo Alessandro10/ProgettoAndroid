@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:listSelector="@drawable/selected"
+    android:drawSelectorOnTop="false"
+    android:fadingEdge="none"
+    android:focusable="false"
+    android:saveEnabled="true">
+
+    <TextView
+        android:background="@drawable/bordo"
+        android:id="@android:id/text1"
+        android:textSize="20sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:paddingLeft="20dip"
+        android:textColor="#ffffff"
+        android:paddingRight="10dip"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+</LinearLayout>

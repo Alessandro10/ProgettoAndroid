@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/tabhost" android:layout_width="fill_parent" android:layout_height="fill_parent">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TabWidget android:id="@android:id/tabs" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+        <FrameLayout android:id="@android:id/tabcontent" android:layout_width="fill_parent" android:layout_height="match_parent">
+            <ScrollView
+                android:id="@+id/scrollo"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <LinearLayout
+                    android:background="#ff0000"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/myScroll"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="0dp"
+                    >
+                    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:layout_width="fill_parent"
+                        android:layout_height="456dp"
+                        android:background="@drawable/sfondofb"
+                        android:paddingLeft="6dp"
+                        android:paddingRight="6dp"
+                        android:paddingBottom="6dp"
+                        android:id="@+id/tab1"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="0dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:id="@+id/linea"
+                            android:layout_marginTop="4dp">
+
+                            <EditText
+                                android:layout_weight="0.25"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:id="@+id/cerca"
+                                android:hint="Città"
+                                android:paddingLeft="5dp"
+                                android:inputType="text"
+                                android:background="@drawable/login"
+                                android:textSize="18sp"/>
+
+                            <Button
+                                android:layout_weight="0.75"
+                                android:background="@drawable/crea_azienda"
+                                android:textSize="18sp"
+                                android:shadowColor="#000000"
+                                android:shadowDx="1.9"
+                                android:shadowDy="1.5"
+                                android:shadowRadius="3.0"
+                                android:textAllCaps="true"
+                                android:textColor="#ffffff"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:text="cerca"
+                                android:id="@+id/ricerca"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical"
+                            android:layout_below="@+id/linea"
+                            android:id="@+id/linea2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            >
+                            <LinearLayout
+                                android:id="@+id/idlinea2.1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <Button
+                                    android:shadowColor="#000000"
+                                    android:shadowDx="1.9"
+                                    android:shadowDy="1.5"
+                                    android:shadowRadius="3.0"
+                                    android:layout_weight="0.50"
+                                    android:paddingLeft="5dp"
+                                    android:gravity="fill_vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:text="Obiettivo"
+                                    android:textSize="20sp"
+                                    android:textColor="#ffffff"
+                                    android:id="@+id/obiettivo"
+                                    android:background="@drawable/crea_azienda"
+                                    android:textAllCaps="false"
+                                    android:layout_marginRight="3dp"/>
+                                <Button
+                                    android:shadowColor="#000000"
+                                    android:shadowDx="1.9"
+                                    android:shadowDy="1.5"
+                                    android:shadowRadius="3.0"
+                                    android:layout_weight="0.50"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_alignParentLeft="true"
+                                    android:paddingLeft="3dp"
+                                    android:gravity="fill_vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:text="Premio"
+                                    android:textSize="20sp"
+                                    android:textColor="#ffffff"
+                                    android:id="@+id/premio"
+                                    android:background="@drawable/crea_azienda"
+                                    android:textAllCaps="false"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginTop="5dp"
+                                android:layout_below="@+id/linea2.1"
+                                android:id="@+id/linea2.2"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <Button
+                                    android:shadowColor="#000000"
+                                    android:shadowDx="1.9"
+                                    android:shadowDy="1.5"
+                                    android:shadowRadius="3.0"
+                                    android:layout_weight="0.50"
+                                    android:layout_alignParentLeft="true"
+                                    android:paddingLeft="5dp"
+                                    android:gravity="fill_vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="55dp"
+                                    android:text="Durata\n\t23:59"
+                                    android:textSize="20sp"
+                                    android:textColor="#ffffff"
+                                    android:id="@+id/select3"
+                                    android:background="@drawable/crea_azienda"
+                                    android:textAllCaps="false"
+                                    android:layout_marginRight="3dp"/>
+                                <Button
+                                    android:layout_marginLeft="3dp"
+                                    android:shadowColor="#000000"
+                                    android:shadowDx="1.9"
+                                    android:shadowDy="1.5"
+                                    android:shadowRadius="3.0"
+                                    android:layout_weight="0.50"
+                                    android:layout_alignParentLeft="true"
+                                    android:paddingLeft="5dp"
+                                    android:gravity="fill_vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="55dp"
+                                    android:text="Distanza\n\t15km"
+                                    android:textSize="20sp"
+                                    android:textColor="#ffffff"
+                                    android:id="@+id/distanza"
+                                    android:background="@drawable/crea_azienda"
+                                    android:textAllCaps="false"/>
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="2dp">
+                                <Button
+                                    android:shadowColor="#000000"
+                                    android:shadowDx="1.9"
+                                    android:shadowDy="1.5"
+                                    android:shadowRadius="3.0"
+                                    android:layout_weight="0.50"
+                                    android:layout_alignParentLeft="true"
+                                    android:gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="55dp"
+                                    android:text="Ordina per : Obiettivo"
+                                    android:textSize="20sp"
+                                    android:textColor="#ffffff"
+                                    android:id="@+id/ordina"
+                                    android:background="@drawable/crea_azienda"
+                                    android:textAllCaps="false"
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginBottom="0dp"
+                            android:layout_below="@+id/linea2"
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginTop="25dp"
+                            android:background="@drawable/bordo"
+                            android:id="@+id/scroll">
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:background="#ffffff"
+                                android:id="@+id/superlineas">
+                                <ExpandableListView
+                                    android:id="@+id/expand"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="match_parent"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20sp"
+                            android:text="ricerca avanzata >>"
+                            android:textColor="#ffffff"
+                            android:textSize="16sp"
+                            android:id="@+id/avanzata"
+                            android:layout_below="@+id/linea2"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/sfondo"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="6dp"
+                android:id="@+id/tab3"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/line"
+                    android:layout_marginTop="4dp">
+
+                    <EditText
+                        android:layout_weight="0.25"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:id="@+id/cerca2"
+                        android:hint="Cerca"
+                        android:paddingLeft="5dp"
+                        android:inputType="text"
+                        android:background="@drawable/login"
+                        android:textSize="18sp"/>
+
+                    <Button
+                        android:layout_weight="0.75"
+                        android:background="@drawable/crea_azienda"
+                        android:textSize="18sp"
+                        android:shadowColor="#000000"
+                        android:shadowDx="1.9"
+                        android:shadowDy="1.5"
+                        android:shadowRadius="3.0"
+                        android:textAllCaps="true"
+                        android:textColor="#ffffff"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:text="cerca"
+                        android:id="@+id/ricerca2"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_below="@+id/line"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bordo"
+                    android:id="@+id/scroll2">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="#ffffff"
+                        android:id="@+id/superlineas2">
+                        <ExpandableListView
+                            android:id="@+id/expand2"
+                            android:layout_height="match_parent"
+                            android:layout_width="match_parent"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:id="@+id/tab2"
+                android:background="@drawable/sfondofb"
+                >
+                <fragment
+                    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" android:id="@+id/map" tools:context=".MapsActivity"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <Switch
+                    android:id="@+id/togglebutton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textOn="Vibrate on"
+                    android:textOff="Vibrate off"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+        </FrameLayout>
+    </LinearLayout>
+</TabHost>
