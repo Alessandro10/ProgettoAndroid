@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawablearancione">
+
+    <TextView
+        android:text="@string/select_route_instruction"
+        android:textSize="@dimen/title_text_size"
+        android:padding="@dimen/dialog_padding"
+        android:textColor="#ffffff"
+        android:shadowColor="#ff000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"
+        android:textAllCaps="true"
+        android:textStyle="italic|bold"
+        android:maxLines="1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/routes_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

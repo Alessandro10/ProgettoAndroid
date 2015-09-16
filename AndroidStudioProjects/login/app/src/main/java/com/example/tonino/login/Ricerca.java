@@ -44,6 +44,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.example.tonino.login.LoginActivity;
+
 public class Ricerca extends Fragment {
 
     boolean click = false;

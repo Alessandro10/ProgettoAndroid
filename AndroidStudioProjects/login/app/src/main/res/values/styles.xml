@@ -13,6 +13,35 @@
         <item name="actionMenuTextColor">#ffffff</item>
     </style>
 
+    <!-- the theme applied to the application or activity -->
+    <style name="CustomActionBarTheme_Operator"
+        parent="@style/Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/MyActionBar_operator</item>
+        <item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>
+        <item name="android:actionMenuTextColor">#ffffff</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar_operator</item>
+        <item name="actionBarTabTextStyle">@style/TabTextStyle</item>
+        <item name="actionMenuTextColor">#ffffff</item>
+    </style>
+
+    <!-- general styles for the action bar -->
+    <style name="MyActionBar_operator"
+        parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:titleTextStyle">@style/TitleTextStyle</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:backgroundStacked">#ffffff</item>
+        <item name="android:backgroundSplit">#ffffff</item>
+
+        <!-- Support library compatibility -->
+        <item name="titleTextStyle">@style/TitleTextStyle</item>
+        <item name="background">@drawable/imagearancione_modificata</item>
+        <item name="android:state_pressed"> @drawable/bottone </item>
+        <item name="backgroundStacked">#ffffff</item>
+        <item name="backgroundSplit">#ffffff</item>
+    </style>
+
     <!-- general styles for the action bar -->
     <style name="MyActionBar"
         parent="@style/Widget.AppCompat.ActionBar">
@@ -40,4 +69,137 @@
         parent="@style/Widget.AppCompat.ActionBar.TabText">
         <item name="android:textColor">#ffffff</item>
     </style>
+
+    <style name="text_theme">
+        <item name="android:textColor">@color/black_cool</item>
+    </style>
+
+    <style name="text_gray_theme">
+        <item name="android:textColor">@color/gray_cool</item>
+    </style>
+
+    <style name="text_prize_won_theme" parent="text_theme">
+        <item name="android:padding">@dimen/prize_won_padding</item>
+    </style>
+
+    <style name="text_prize_won_label_theme" parent="text_prize_won_theme">
+        <item name="android:layout_marginTop">@dimen/prize_won_margin</item>
+    </style>
+
+    <style name="route_theme">
+        <item name="android:background">@drawable/abc_list_pressed_holo_dark</item>
+    </style>
+
+    <style name="button_black_black_theme">
+        <item name="android:background">@drawable/background_black_border_black</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:layout_margin">@dimen/button_margin</item>
+    </style>
+
+    <style name="button_white_black_theme" parent="button_black_black_theme">
+        <item name="android:background">@drawable/background_button</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="button_delete" parent="button_black_black_theme">
+        <item name="android:background">@drawable/background_button_delete</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="button_gray_gray_theme" parent="button_black_black_theme">
+        <item name="android:background">@drawable/background_gray_border_gray</item>
+    </style>
+
+    <style name="button_white_gray_theme" parent="button_black_black_theme">
+        <item name="android:background">@drawable/background_white_border_gray</item>
+        <item name="android:textColor">@color/black_cool</item>
+    </style>
+
+    <style name="button_white_gray_gray_theme" parent="button_white_gray_theme">
+        <item name="android:textColor">@color/gray_cool</item>
+    </style>
+
+    <style name="button_white_gray_small_theme" parent="button_white_gray_theme">
+        <item name="android:textColor">@color/purple</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">30dp</item>
+    </style>
+
+    <style name="button_white_gray_darkred_small_theme" parent="button_white_gray_theme">
+        <item name="android:textColor">@color/darkred</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">30dp</item>
+    </style>
+
+    <style name="button_purple_gray_theme" parent="button_black_black_theme">
+        <item name="android:background">@drawable/background_purple_border_gray</item>
+    </style>
+
+    <style name="button_purple_gray_small_theme" parent="button_purple_gray_theme">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">30dp</item>
+    </style>
+
+    <style name="img_button_gray_gray_theme" parent="button_gray_gray_theme">
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="img_small_button_gray_gray_theme" parent="img_button_gray_gray_theme">
+        <item name="android:padding">3dp</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
+    <style name="img_circle_theme">
+        <item name="android:background">@drawable/circle_background</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:padding">3dp</item>
+    </style>
+
+    <style name="button_dialog_size">
+        <item name="android:textSize">@dimen/abc_text_size_small_material</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_margin">@dimen/button_margin</item>
+    </style>
+
+    <style name="button_dialog_black_theme" parent="button_dialog_size">
+        <item name="android:background">@drawable/background_black_border_black</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="button_dialog_white_theme" parent="button_dialog_size">
+        <item name="android:background">@drawable/background_white_border_black</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="button_dialog_gray_theme" parent="button_dialog_size">
+        <item name="android:background">@drawable/background_gray_border_gray</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="dialog_theme">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="dialog_theme_bk" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@drawable/background_white_border_black</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

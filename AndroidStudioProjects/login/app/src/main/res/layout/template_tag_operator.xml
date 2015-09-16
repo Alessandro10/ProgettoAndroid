@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/route_tag_padding"
+    android:layout_margin="@dimen/route_tag_padding"
+    android:background="@drawable/tags_scrollbar_operator"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tag_name"
+        android:textSize="@dimen/route_tag_size"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/route_tag_padding"
+        android:layout_marginStart="@dimen/route_tag_padding"
+        android:layout_marginRight="@dimen/route_tag_padding"
+        android:layout_marginEnd="@dimen/route_tag_padding"
+        />
+
+    <ImageButton
+        android:id="@+id/tag_delete_btn"
+        android:src="@drawable/ic_delete_tag"
+        style="@style/img_small_button_gray_gray_theme"
+        android:contentDescription="@string/route_tag_delete_btn_content_description"
+        android:layout_width="@dimen/tag_delete_btn_size"
+        android:layout_height="@dimen/tag_delete_btn_size"
+        android:visibility="gone"/>
+
+</LinearLayout>

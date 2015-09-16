@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/fragment_verify"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/prize_won_margin"
+    android:background="@drawable/drawablearancione">
+
+    <TextView
+        android:shadowColor="#ff000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"
+        android:textAllCaps="true"
+        android:textStyle="italic|bold"
+        android:maxLines="1"
+        android:id="@+id/title"
+        android:text="@string/title_prize_won"
+        android:textSize="@dimen/title_text_size"
+        android:padding="@dimen/dialog_padding"
+        android:textColor="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/prize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/prize_name_label"
+            android:text="@string/prize_name_label"
+            android:textSize="@dimen/title_text_size"
+            style="@style/text_prize_won_label_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  />
+
+        <TextView
+            android:id="@+id/prize_name"
+            android:textSize="@dimen/title_text_size"
+            style="@style/text_prize_won_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/prize_name_label"
+            android:layout_toRightOf="@id/prize_name_label"
+            android:layout_toEndOf="@id/prize_name_label"/>
+
+        <TextView
+            android:id="@+id/prize_description_label"
+            android:text="@string/prize_description_label"
+            android:textSize="@dimen/prize_won_text_size"
+            style="@style/text_prize_won_label_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/prize_name" />
+
+        <TextView
+            android:id="@+id/prize_description"
+            android:textSize="@dimen/prize_won_text_size"
+            style="@style/text_prize_won_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/prize_description_label"
+            android:layout_toRightOf="@id/prize_description_label"
+            android:layout_toEndOf="@id/prize_description_label"/>
+
+        <TextView
+            android:id="@+id/prize_visible_label"
+            android:text="@string/prize_visible_label"
+            android:textSize="@dimen/prize_won_text_size"
+            style="@style/text_prize_won_label_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/prize_description"/>
+
+        <TextView
+            android:id="@+id/prize_visible"
+            android:textSize="@dimen/prize_won_text_size"
+            style="@style/text_prize_won_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/prize_visible_label"
+            android:layout_toEndOf="@+id/prize_visible_label"
+            android:layout_alignBaseline="@+id/prize_visible_label" />
+
+        <TextView
+            android:id="@+id/prize_repeat_label"
+            android:text="@string/prize_repeat_label"
+            android:textSize="@dimen/prize_won_text_size"
+            style="@style/text_prize_won_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prize_visible_label"/>
+
+        <TextView
+            android:id="@+id/prize_repeat"
+            android:textSize="@dimen/prize_won_text_size"
+            style="@style/text_prize_won_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/prize_repeat_label"
+            android:layout_toEndOf="@+id/prize_repeat_label"
+            android:layout_alignBaseline="@+id/prize_repeat_label" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/failure"
+        android:textSize="@dimen/title_text_size"
+        style="@style/text_prize_won_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title" />
+
+    <Button
+        android:shadowColor="#ff000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"
+        android:textAllCaps="true"
+        android:textStyle="italic|bold"
+        android:maxLines="1"
+        android:id="@+id/validate_btn"
+        android:text="@string/validate_btn_text"
+        style="@style/button_white_black_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
+    <com.facebook.share.widget.ShareButton
+        android:id="@+id/fb_share_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/validate_btn"
+        android:visibility="gone"/>
+
+</RelativeLayout>

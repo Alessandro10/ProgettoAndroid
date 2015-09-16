@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="@dimen/template_padding">
+
+    <TableLayout
+        android:id="@+id/route_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/routeNameEdit"
+                android:src="@drawable/ic_route_edit"
+                style="@style/img_button_gray_gray_theme"
+                android:contentDescription="@string/edit_content_description"
+                android:layout_width="@dimen/route_edit_field_btn_size"
+                android:layout_height="@dimen/route_edit_field_btn_size"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/routeName"
+                android:textSize="@dimen/route_name_size"
+                style="@style/text_theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+            <ImageButton
+                android:id="@+id/routeDescriptionEdit"
+                android:src="@drawable/ic_route_edit"
+                style="@style/img_button_gray_gray_theme"
+                android:contentDescription="@string/edit_content_description"
+                android:layout_width="@dimen/route_edit_field_btn_size"
+                android:layout_height="@dimen/route_edit_field_btn_size"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/routeDescription"
+                android:textSize="@dimen/route_text_size"
+                style="@style/text_theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+            <ImageButton
+                android:id="@+id/routeValidityEdit"
+                android:src="@drawable/ic_route_edit"
+                style="@style/img_button_gray_gray_theme"
+                android:contentDescription="@string/edit_content_description"
+                android:layout_width="@dimen/route_edit_field_btn_size"
+                android:layout_height="@dimen/route_edit_field_btn_size"
+                android:visibility="gone"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:text="@string/route_validity_label"
+                    android:textSize="@dimen/route_text_size"
+                    style="@style/text_theme"
+                    android:id="@+id/routeValidityLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/routeValidity"
+                    android:textSize="@dimen/route_text_size"
+                    style="@style/text_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/route_validity_margin"
+                    android:layout_marginStart="@dimen/route_validity_margin" />
+            </LinearLayout>
+        </TableRow>
+
+
+    </TableLayout>
+
+    <ImageButton
+        android:id="@+id/tag_new_btn"
+        android:src="@drawable/ic_new_route"
+        style="@style/img_button_gray_gray_theme"
+        android:contentDescription="@string/new_tag_btn_content_description"
+        android:layout_below="@id/route_table"
+        android:layout_margin="@dimen/route_tag_padding"
+        android:layout_width="@dimen/tag_new_btn_size"
+        android:layout_height="@dimen/tag_new_btn_size"
+        android:visibility="gone"/>
+
+    <include layout="@layout/container_tags"
+        android:id="@+id/route_tags_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/route_table"
+        android:layout_toRightOf="@+id/tag_new_btn"
+        android:layout_toEndOf="@+id/tag_new_btn" />
+
+</RelativeLayout>

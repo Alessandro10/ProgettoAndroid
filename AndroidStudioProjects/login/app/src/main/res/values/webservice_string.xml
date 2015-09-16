@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="WEB_SERVICE_URL">http://daniele.cortesi2.web.cs.unibo.it/wsgi</string>
+    <string name="WEB_SERVICE_URL_BK">http://www.dani.host-ed.me</string>
+    <string name="WEB_SERVICE_LOGIN">/login</string>
+    <string name="WEB_SERVICE_LOGIN_FB">/loginfb</string>
+    <string name="WEB_SERVICE_USER_EDIT">/user/edit</string>
+    <string name="WEB_SERVICE_SIGNUP">/signup</string>
+    <string name="WEB_SERVICE_ROUTES">/routes</string>
+    <string name="WEB_SERVICE_ROUTES_EDIT">/route/edit</string>
+    <string name="WEB_SERVICE_ROUTES_ADD">/route/add</string>
+    <string name="WEB_SERVICE_ROUTES_DELETE">/route/delete</string>
+    <string name="WEB_SERVICE_PRIZES_EDIT">/prize/edit</string>
+    <string name="WEB_SERVICE_PRIZE_ADD">/prize/add</string>
+    <string name="WEB_SERVICE_ROUTE_ADD_PRIZE">/route/add/prize</string>
+    <string name="WEB_SERVICE_ROUTE_REMOVE_PRIZE">/route/remove/prize</string>
+    <string name="WEB_SERVICE_PRIZE_VERIFIY">/prize/verify</string>
+    <string name="WEB_SERVICE_TAGS">/tags</string>
+
+</resources>

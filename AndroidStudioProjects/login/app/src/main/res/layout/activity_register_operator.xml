@@ -1,0 +1,210 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="it.unibo.danielecortesi.lam2015.operator.RegisterActivity">
+
+    <RelativeLayout
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawablearancione">
+
+        <TextView
+            android:textColor="#ffffff"
+            android:shadowColor="#ff000000"
+            android:shadowDx="1.9"
+            android:shadowDy="1.5"
+            android:shadowRadius="3.0"
+            android:textAllCaps="true"
+            android:textStyle="italic|bold"
+            android:maxLines="1"
+            android:textSize="20sp"
+            android:id="@+id/username_label"
+            android:text="@string/username_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:textSize="18sp"
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username_label"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:shadowColor="#ff000000"
+            android:shadowDx="1.9"
+            android:shadowDy="1.5"
+            android:shadowRadius="3.0"
+            android:textAllCaps="true"
+            android:textStyle="italic|bold"
+            android:maxLines="1"
+            android:id="@+id/password_label"
+            android:text="@string/password_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/username"/>
+
+        <EditText
+            android:textSize="18sp"
+            android:id="@+id/password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password_label"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:shadowColor="#ff000000"
+            android:shadowDx="1.9"
+            android:shadowDy="1.5"
+            android:shadowRadius="3.0"
+            android:textAllCaps="true"
+            android:textStyle="italic|bold"
+            android:maxLines="1"
+            android:id="@+id/company_label"
+            android:text="@string/company_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password"/>
+
+        <EditText
+            android:textSize="18sp"
+            android:id="@+id/company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/company_label"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:shadowColor="#ff000000"
+            android:shadowDx="1.9"
+            android:shadowDy="1.5"
+            android:shadowRadius="3.0"
+            android:textAllCaps="true"
+            android:textStyle="italic|bold"
+            android:maxLines="1"
+            android:id="@+id/country_label"
+            android:text="@string/county_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/company"/>
+
+        <EditText
+            android:textSize="18sp"
+            android:id="@+id/country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/country_label"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:shadowColor="#ff000000"
+            android:shadowDx="1.9"
+            android:shadowDy="1.5"
+            android:shadowRadius="3.0"
+            android:textAllCaps="true"
+            android:textStyle="italic|bold"
+            android:maxLines="1"
+            android:id="@+id/city_label"
+            android:text="@string/city_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/country"/>
+
+        <EditText
+            android:textSize="18sp"
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/city_label"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:shadowColor="#ff000000"
+            android:shadowDx="1.9"
+            android:shadowDy="1.5"
+            android:shadowRadius="3.0"
+            android:textAllCaps="true"
+            android:textStyle="italic|bold"
+            android:maxLines="1"
+            android:id="@+id/address_label"
+            android:text="@string/address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/city"/>
+
+        <EditText
+            android:textSize="18sp"
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/address_label"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:shadowColor="#ff000000"
+            android:shadowDx="1.9"
+            android:shadowDy="1.5"
+            android:shadowRadius="3.0"
+            android:textAllCaps="true"
+            android:textStyle="italic|bold"
+            android:maxLines="1"
+            android:id="@+id/tags_label"
+            android:text="@string/tags_label"
+            android:layout_marginTop="@dimen/button_margin"
+            android:layout_marginRight="@dimen/button_padding"
+            android:layout_marginEnd="@dimen/button_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tag_new_btn_size"
+            android:gravity="center_vertical"
+            android:layout_below="@id/address"/>
+
+        <ImageButton
+            android:id="@+id/tag_new_btn"
+            android:src="@drawable/ic_new_route"
+            style="@style/img_button_gray_gray_theme"
+            android:contentDescription="@string/new_tag_btn_content_description"
+            android:layout_toRightOf="@id/tags_label"
+            android:layout_toEndOf="@id/tags_label"
+            android:layout_width="@dimen/tag_new_btn_size"
+            android:layout_height="@dimen/tag_new_btn_size"
+            android:layout_below="@id/address" />
+
+        <include layout="@layout/container_tags_operator"
+            android:id="@+id/tags_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tags_label" />
+
+        <Button
+            android:id="@+id/register_btn"
+            android:text="@string/register_btn_text"
+            style="@style/button_white_black_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tags_scrollview" />
+
+    </RelativeLayout>
+
+
+</ScrollView>

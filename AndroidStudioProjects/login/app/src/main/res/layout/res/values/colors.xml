@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="select_color">#3399FF</color>
+    <color name="edit_color">#FFFF19</color>
+    <color name="default_color">#E60000</color>
+    <color name="new_marker_color">#6C4900</color>
+    <color name="gray_cool">#888888</color>
+    <color name="gray_separator">#BFBFBF</color>
+    <color name="black_cool">#343434</color>
+    <color name="gray_light">#CCCCCC</color>
+    <color name="darkwhite">#E7E7E7</color>
+    <color name="orange">#FF6600</color>
+    <color name="green">#99CC00</color>
+    <color name="purple">#8A00E6</color>
+    <color name="darkred">#8A0000</color>
+    <color name="darkgray">#696969</color>
+    <color name="prize_green">#75A319</color>
+    <color name="prize_purple">#8A8AE6</color>
+    <color name="prize_lightblue">#ADD6FF</color>
+</resources>

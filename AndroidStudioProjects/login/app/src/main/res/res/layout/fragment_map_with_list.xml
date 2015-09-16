@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity$PlaceholderFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/map"
+            tools:context="it.unibo.danielecortesi.lam2015.operator.routes"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            />
+
+        <Button
+            android:id="@+id/help_btn"
+            android:text="@string/help_btn_text"
+            style="@style/button_white_gray_small_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <ImageButton
+                android:id="@+id/new_thing_btn"
+                android:src="@drawable/ic_new_route"
+                android:contentDescription="@string/route_new_btn_content_description"
+                style="@style/button_black_black_theme"
+                android:scaleType="fitCenter"
+                android:layout_width="@dimen/route_new_btn_size"
+                android:layout_height="@dimen/route_new_btn_size"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+
+            <RelativeLayout
+                android:id="@+id/edit_thing_controls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/save_edit_btn"
+                    android:text="@string/route_save_edits"
+                    style="@style/button_gray_gray_theme"
+                    android:textSize="@dimen/route_edit_delete_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+                <Button
+                    android:id="@+id/cancel_edit_btn"
+                    android:text="@string/route_cancel_edits"
+                    style="@style/button_white_gray_theme"
+                    android:textSize="@dimen/route_edit_delete_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/thing_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:visibility="gone">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/thing_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/sfondo">
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

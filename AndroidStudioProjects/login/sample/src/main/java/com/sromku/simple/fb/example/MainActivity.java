@@ -18,6 +18,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mSimpleFacebook = SimpleFacebook.getInstance(this);
 
         // test local language

@@ -210,6 +210,24 @@
         android:paddingRight="10dp"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dani"
+        android:id="@+id/Dani"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/login_username_error"
+        android:layout_toStartOf="@+id/login_username_error" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GEO_CODER"
+        android:id="@+id/geo_coder"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>
 </ScrollView>

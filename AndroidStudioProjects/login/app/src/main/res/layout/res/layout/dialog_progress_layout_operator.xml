@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_dialog"
+    android:padding="@dimen/dialog_padding">
+
+    <TextView
+        android:text="@string/wait_message"
+        android:id="@+id/dialog_title"
+        android:textSize="@dimen/dialog_title_size"
+        android:textColor="@color/black_cool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:indeterminate="true"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_title"
+        android:id="@+id/progressBar"
+        android:layout_marginTop="@dimen/dialog_padding"
+        android:layout_marginRight="@dimen/dialog_padding"
+        android:layout_marginEnd="@dimen/dialog_padding"/>
+
+    <TextView
+        android:id="@+id/dialog_message"
+        android:textSize="@dimen/dialog_message_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignTop="@id/progressBar"
+        android:layout_alignBottom="@id/progressBar"
+        android:layout_toRightOf="@id/progressBar"
+        android:layout_toEndOf="@id/progressBar"
+        android:layout_marginLeft="@dimen/dialog_padding"
+        android:layout_marginStart="@dimen/dialog_padding"/>
+
+</RelativeLayout>

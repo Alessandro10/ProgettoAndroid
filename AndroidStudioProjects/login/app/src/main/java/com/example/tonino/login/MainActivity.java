@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
@@ -24,7 +26,18 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.tonino.login.Dialogs.DialogBroadcastReceiver;
+import com.example.tonino.login.Dialogs.MessageDialog;
+import com.example.tonino.login.Dialogs.NoConnectionDialog;
+import com.example.tonino.login.Dialogs.ProgressDialogHandler;
+import com.example.tonino.login.Types.Operator;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.ProfileTracker;
+import com.facebook.internal.CallbackManagerImpl;
 import com.facebook.login.DefaultAudience;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.maps.model.LatLng;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.SimpleFacebookConfiguration;
@@ -36,6 +49,7 @@ import com.sromku.simple.fb.utils.Logger;
 import com.sromku.simple.fb.utils.Utils;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -49,14 +63,16 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener ,ServiceInquirer.OnResponseReceivedCallback {
 
+    private boolean operatore = false;
     private boolean FbBool = false;
     private String username,password;
     private Button ok;
@@ -69,10 +85,294 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private FragmentActivity myContext;
 
 
+    // --------------------Parte Dani INIZIO------------------------------------------
+
+    public static final String DG_ARG_USERNAME = "username";
+    public static final String DG_ARG_PASSWORD = "password;";
+
+    public static final int REGISTER_REQUEST_CODE = 0;
+    public static final int EDIT_OPERATOR_CODE = 1;
+
+    protected LoginButton fbLoginButton;
+    protected ProfileTracker profileTracker;
+    protected CallbackManager callbackManager;
+
+    protected Button loginBtn;
+    protected Button registerBtn;
+    protected EditText usernameView;
+    protected EditText passwordView;
+    protected ServiceInquirer serviceInquirer;
+
+    protected ProgressDialogHandler progressDialogHandler;
+
+    protected SharedPreferencesHandler sharedPreferencesHandler;
+
+    protected DialogBroadcastReceiver dialogBroadcastReceiver;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (AccessToken.getCurrentAccessToken() != null) {
+            if (AccessToken.getCurrentAccessToken().isExpired()) {
+                AccessToken.refreshCurrentAccessTokenAsync();
+            }
+        }
+        if (callbackManager == null) {
+            callbackManager = new CallbackManagerImpl();
+        }
+        if (profileTracker == null) {
+            profileTracker = new ProfileTracker() {
+                @Override
+                protected void onCurrentProfileChanged(com.facebook.Profile oldProfile,
+                                                       com.facebook.Profile newProfile) {
+                    if (newProfile != null) {
+                        loggedInFB();
+                        stopTracking();
+                    }
+                }
+            };
+            profileTracker.startTracking();
+        }
+        if (dialogBroadcastReceiver != null) {
+            dialogBroadcastReceiver.registerForReceive(this);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (dialogBroadcastReceiver != null) {
+            dialogBroadcastReceiver.unregisterForReceive(this);
+        }
+    }
+
+
+    public void hideKeyboard() {
+        View focusedView = getCurrentFocus();
+        if (focusedView != null) {
+            ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(focusedView.getWindowToken(), 0);
+        }
+    }
+
+
+    /**
+     * To be called when the login btn is touched. Retrieves username and password from EditTexts,
+     * if one of them is empty displays toast message, else proceeds with login
+     */
+    protected void loginBtnTouched(String username , String pwd) {
+        //String username = usernameView.getText().toString();
+        //String password = passwordView.getText().toString();
+        /*if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, getString(R.string.login_error_empty),
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {*/
+            login(username, pwd);
+        //}
+    }
+
+    /**
+     * Sends the login request to the web service.
+     *
+     * @param username
+     * @param password
+     */
+    public void login(String username, String password)  {
+        Log.i("loginFatto", "ok");
+        serviceInquirer.setUserInfo(username, password);
+        Log.i("loginFatto" , "fine");
+        serviceInquirer.login(this, this);
+        Log.i("loginFatto" , "fine");
+        //progressDialogHandler.show(this, R.string.loading_login);
+    }
+
+
+
+    /**
+     * Sends the login with FB request to the web service with also login and psw parameters so the
+     * accounts are connected.
+     * @param username
+     * @param password
+     * @param fbID facebook user id
+     */
+    public void connectFB(String username, String password, String fbID) {
+        serviceInquirer.setUserInfo(username, password);
+        String json = new JSONParser.OperatorJsonifier(null)
+                .putLogin(username)
+                .putPsw(password)
+                .putFbId(fbID)
+                .toString();
+        serviceInquirer.post(this, getString(R.string.WEB_SERVICE_LOGIN_FB), json, this);
+        progressDialogHandler.show(this, R.string.loading_login);
+    }
+
+
+    public static void logoutFB() {
+        AccessToken.setCurrentAccessToken(null);
+        com.facebook.Profile.setCurrentProfile(null);
+    }
+
+    private void startMainActivity(Operator operator) {
+        profileTracker = null;
+        Intent intent = new Intent(this, MainActivity_operator.class);
+        intent.putExtra(MainActivity_operator.ARG_OPERATOR, operator);
+        startActivity(intent);
+    }
+
+    /**
+     * Handles login response from the web service.
+     *
+     * @param originalUri
+     * @param statusCode
+     * @param response
+     */
+    @Override
+    public void onResponseReceived(String originalUri, int statusCode, String response) {
+        //progressDialogHandler.dismiss();
+        switch (statusCode) {
+            case HttpStatus.SC_OK:
+                Operator operator = new JSONParser(response).getOperator();
+                if (operator == null) {
+                    new AlertDialog.Builder(this)
+                            .setMessage(R.string.login_error_not_operator)
+                            .setTitle(R.string.login_error_title)
+                            .setNegativeButton(R.string.dialog_ok_option, null)
+                            .show();
+                } else {
+                    operator.id = serviceInquirer.getUsername();
+                    operator.psw = serviceInquirer.getPassword();
+                    //saving auto login option
+                    //sharedPreferencesHandler.put(this, getString(R.string.saved_auto_login),
+                    //        ((CheckBox) findViewById(R.id.auto_login)).isChecked());
+                    // if it's a normal login or registration
+                    if (originalUri.equals(getString(R.string.WEB_SERVICE_LOGIN))) {
+                        // saving username and password for future sessions
+                        //saveUsernamePassword(operator.id, operator.psw);
+                    }
+                    // else it's a fb login
+                    else {
+                       /* sharedPreferencesHandler.put(this, R.string.saved_use_fb, true);
+                        sharedPreferencesHandler.put(this, R.string.saved_username, null);
+                        sharedPreferencesHandler.put(this, R.string.saved_password, null);
+                        sharedPreferencesHandler.commit();*/
+                    }
+                    // if the account is incomplete
+                    if (operator.name_operator == null) {
+                        Intent intent = new Intent(this, RegisterActivity.class);
+                        intent.putExtra(RegisterActivity.ARG_IN_OPERATOR, operator);
+                        startActivityForResult(intent, EDIT_OPERATOR_CODE);
+                        return;
+                    }
+                    startMainActivity(operator);
+                }
+                break;
+            case HttpStatus.SC_UNAUTHORIZED:
+                new AlertDialog.Builder(this)
+                        .setMessage(R.string.login_error_wrong_credentials)
+                        .setTitle(R.string.login_error_title)
+                        .setNegativeButton(R.string.dialog_ok_option, null)
+                        .show();
+                break;
+            case WebServiceRequestService.NO_INTERNET_CONNECTION:
+                NoConnectionDialog.show(this);
+                break;
+        }
+    }
+
+    public void loginFB(String fbID) {
+        serviceInquirer.setUserInfo(fbID, "");
+        serviceInquirer.loginFB(this, this);
+        progressDialogHandler.show(this, R.string.loading_login);
+    }
+
+    /**
+     * Called when the user logged in with FB.
+     * Checks if he used to login with a normal account and asks if he wants to connect it.
+     * Otherwise proceeds with registration.
+     */
+    protected void loggedInFB() {
+        String username = sharedPreferencesHandler.get(this, R.string.saved_username, null);
+        boolean use_fb = sharedPreferencesHandler.get(this, R.string.saved_use_fb, false);
+        if (username != null && !use_fb) {
+            String password = sharedPreferencesHandler.get(this, R.string.saved_password, null);
+            Bundle customParams = new Bundle();
+            customParams.putString(DG_ARG_USERNAME, username);
+            customParams.putString(DG_ARG_PASSWORD, password);
+            new MessageDialog.Builder(this)
+                    .setMessageStr(getString(R.string.connect_fb_message, username))
+                    .setTitle(R.string.connect_fb_title)
+                    .setNoCancelButton()
+                    .setDeleteBtnText(R.string.dialog_new_account_btn)
+                    .setConfirmBtnText(R.string.dialog_connect_btn)
+                    .setCustomParams(customParams)
+                    .setDismissOnRestore()
+                    .setNotCancelable()
+                    .show();
+            dialogBroadcastReceiver = new ConnectFBReceiver(this);
+        }
+        else {
+            loginFB(com.facebook.Profile.getCurrentProfile().getId());
+        }
+    }
+
+    protected class ConnectFBReceiver extends DialogBroadcastReceiver {
+
+        public ConnectFBReceiver(Context context) {
+            super(context);
+        }
+
+        @Override
+        public void onDialogConfirm(Bundle customParams, Bundle userInput) {
+            if (customParams != null) {
+                connectFB(customParams.getString(DG_ARG_USERNAME),
+                        customParams.getString(DG_ARG_PASSWORD),
+                        com.facebook.Profile.getCurrentProfile().getId());
+            }
+        }
+
+        @Override
+        public void onDialogCancel() {}
+
+        @Override
+        public void onDialogDelete(Bundle customParams) {
+            loginFB(com.facebook.Profile.getCurrentProfile().getId());
+        }
+    }
+
+    /**
+     * Saves username and password in shared preferences
+     * @param username
+     * @param password
+     */
+    public void saveUsernamePassword(String username, String password) {
+        sharedPreferencesHandler.put(this, R.string.saved_username, username);
+        sharedPreferencesHandler.put(this, R.string.saved_password, password);
+        sharedPreferencesHandler.commit();
+    }
+
+    // --------------------Parte Dani FINE------------------------------------------
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mSimpleFacebook.onActivityResult(requestCode, resultCode, data);
+        //Dani
+
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && !operatore) {
+            Log.i("RESULT_OK" , "ok");
+            if (requestCode == REGISTER_REQUEST_CODE || requestCode == EDIT_OPERATOR_CODE) {
+                Operator operator = data.getParcelableExtra(RegisterActivity.ARG_OUT_OPERATOR);
+                //usernameView.setText(operator.id);
+                //passwordView.setText(operator.psw);
+                //saveUsernamePassword(operator.id, operator.psw);
+                startMainActivity(operator);
+            }
+        }
+
+        //Fine Dani
     }
 
 
@@ -124,6 +424,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
                         String risposta = response.toString();
 
+
                         JSONObject mainObject = null;
                         JSONArray tipiConsigliati = null;
 
@@ -131,8 +432,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
                         int iD = 0;
                         String result = EntityUtils.toString(response.getEntity());
+                        Log.i("risposta" , result);
+
+                        int tipo_utente = 0;
+
                         try {
                             mainObject = new JSONObject(result);
+                            tipo_utente = mainObject.getInt("is_operator");
+
+                            if(tipo_utente == 1)
+                            {
+                                loginBtnTouched(username , pwd);
+                            }
+                            else {
                             tipiConsigliati = mainObject.getJSONArray("tags");
                             for (int i = 0; i < tipiConsigliati.length(); i++) {
                                 ListTipi.add(((String) tipiConsigliati.get(i)));
@@ -140,13 +452,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                             //ListTipi.add("cultura");
                             //ListTipi.add("fifi");
                             Salva.setListaDeiTagsPreferiti(ListTipi);
+                            }
                         }
                         catch (Exception e)
                         {
                             e.printStackTrace();
                         }
-                        Salva.setUsername(username);
-                        okPuoiEntrare();
+                        if(tipo_utente != 1) {
+                            operatore = true;
+                            Salva.setUsername(username);
+                            okPuoiEntrare();
+                        }
                     }
                     else
                     {
@@ -395,7 +711,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     json.put("psw", pwd);
                     json.put("is_operator" , false);
 
-
                     JSONArray tags = new JSONArray();
                     int j = 0;
                     Iterator iterator = listapreferiti.iterator();
@@ -617,9 +932,33 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
 
+    public LatLng getPosition(String address) {
+        LatLng position;
+        try {
+            Log.i("address" , address);
+            List<Address> addressList = new Geocoder(this).getFromLocationName(address, 1);
+            if (!addressList.isEmpty()) {
+                Log.i("address","pieno");
+                Address resultingAddress = addressList.get(0);
+                Log.i("address", " " + resultingAddress.getLatitude() );
+                position = new LatLng(resultingAddress.getLatitude(),
+                        resultingAddress.getLongitude());
+            }
+            else {
+                Log.i("address","vuoto");
+                throw new IOException();
+            }
+        } catch (IOException e) {
+            position = null;
+        }
+        return position;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         myContext = this;
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(mBroadcastArrayListAction);
@@ -643,6 +982,30 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
 
+
+        Button btnGeo = (Button) findViewById(R.id.geo_coder);
+        btnGeo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this , geo_coder_example.class);
+                startActivity(intent);
+            }
+        });
+
+
+        final Button btnDani = (Button) findViewById(R.id.Dani);
+
+        btnDani.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
+            }
+
+        });
+
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             int c = extras.getInt("notifica");
@@ -653,6 +1016,43 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
 
         SimpleFacebook.initialize(this);
+
+
+        //-------------------------------Dani
+        serviceInquirer = ServiceInquirer.getInstance();
+        sharedPreferencesHandler = SharedPreferencesHandler.getInstance();
+/*
+        fbLoginButton = (LoginButton) findViewById(R.id.fb_login_btn);
+        fbLoginButton.setReadPermissions("public_profile");
+        logoutFB();
+
+        serviceInquirer = ServiceInquirer.getInstance();
+        usernameView = (EditText) findViewById(R.id.username);
+        passwordView = (EditText) findViewById(R.id.password);
+        loginBtn = (Button) findViewById(R.id.login_btn);
+        registerBtn = (Button) findViewById(R.id.register_btn);
+        loginBtn.setOnClickListener(this);
+        registerBtn.setOnClickListener(this);
+        progressDialogHandler = new ProgressDialogHandler();
+        // automatically fill username and password if they were saved
+        sharedPreferencesHandler = SharedPreferencesHandler.getInstance();
+        String username = sharedPreferencesHandler.get(this, R.string.saved_username, null);
+        String password = sharedPreferencesHandler.get(this, R.string.saved_password, null);
+        if (username != null) {
+            usernameView.setText(username);
+            passwordView.setText(password);
+        }
+        if (sharedPreferencesHandler.get(this, R.string.saved_auto_login, false)) {
+            ((CheckBox) findViewById(R.id.auto_login)).setChecked(true);
+            if (sharedPreferencesHandler.get(this, R.string.saved_use_fb, false)) {
+                fbLoginButton.performClick();
+            }
+            else if (username != null) {
+                login(username, password);
+            }
+        }
+*/
+        //-------------------------Fine Dani
 
         // set log to true
         Logger.DEBUG_WITH_STACKTRACE = true;
@@ -845,7 +1245,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             username = editTextUsername.getText().toString();
             password = editTextPassword.getText().toString();
 
-            if (controlla_correttezza(username, password)) {
+            if (
+                    //controlla_correttezza(username, password)
+                    true) {
             if (saveLoginCheckBox.isChecked()) {
                 loginPrefsEditor.putBoolean("saveLogin", true);
                 loginPrefsEditor.putString("username", username);
