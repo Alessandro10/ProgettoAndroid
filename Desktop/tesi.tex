@@ -1,0 +1,314 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% University Assignment Title Page 
+% LaTeX Template
+% Version 1.0 (27/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% WikiBooks (http://en.wikibooks.org/wiki/LaTeX/Title_Creation)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+% Instructions for using this template:
+% This title page is capable of being compiled as is. This is not useful for 
+% including it in another document. To do this, you have two options: 
+%
+% 1) Copy/paste everything between \begin{document} and \end{document} 
+% starting at \begin{titlepage} and paste this into another LaTeX file where you 
+% want your title page.
+% OR
+% 2) Remove everything outside the \begin{titlepage} and \end{titlepage} and 
+% move this file to the same directory as the LaTeX file you wish to add it to. 
+% Then add \input{./title_page_1.tex} to your LaTeX file where you want your
+% title page.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{imakeidx}
+\makeindex[columns=5, title=Alphabetical Index, intoc ]
+   
+\usepackage[usenames,dvipsnames]{color}
+
+\usepackage[hyperfootnotes=false]{hyperref}
+\hypersetup{
+ colorlinks=false,
+ citecolor=black,
+ linkcolor=Red,
+ urlcolor=black}
+
+ 
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+
+\usepackage{etoolbox}
+
+\usepackage{scrextend}
+\changefontsizes[15pt]{13.5pt}
+
+\makeatletter
+\patchcmd{\@fancyhead}{\rlap}{\color{black}\rlap}{}{}
+\patchcmd{\headrule}{\hrule}{\color{black}\hrule}{}{}
+\patchcmd{\@fancyfoot}{\rlap}{\color{black}\rlap}{}{}
+\patchcmd{\footrule}{\hrule}{\color{black}\hrule}{}{}
+\makeatother
+
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\usepackage{graphicx}
+
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+
+\usepackage{etoolbox}
+ 
+\usepackage{color}   %May be necessary if you want to color links
+
+\usepackage{mathptmx}
+\usepackage{anyfontsize}
+\usepackage{t1enc}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+
+\makeatletter
+\let\@orig@endthebibliography\endthebibliography
+\renewcommand\endthebibliography{%
+  \xdef\@kept@last@number{\the\c@enumiv}%
+  \@orig@endthebibliography}
+
+\newenvironment{thesitography}[1]
+  {\def\bibname{Siti consultati}%
+   \thebibliography{#1}%
+   \setcounter{enumiv}{\@kept@last@number}%
+}
+  {\@orig@endthebibliography}
+\makeatother
+
+\renewcommand{\rmdefault}{ptm}
+
+\begin{document}
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\newcommand{\HRulea}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\newcommand{\HRuleb}{\rule{\linewidth}{0.7mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\newcommand{\newlecture}{%
+  \clearpage
+  \refstepcounter{lecture}%
+  \noindent{\large\bfseries \lecturename{} \thelecture}%
+  \par\bigskip\noindent\ignorespaces%
+}
+
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+
+\renewcommand{\familydefault}{\rmdefault}
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Alma Mater Studiorum}\\[0.2cm] % Name of your university/college
+\textsc{\LARGE Universit\'a degli studi di}\\[0.2cm] % Name of your university/college
+\textsc{\LARGE Bologna}\\[0.1cm]
+\HRulea \\[0.0cm]
+\HRuleb \\[0.5cm]
+\textsc {\textbf{\Large Scuola di Scienze}}\\[0.5cm] % Major heading such as course name
+\textsc{\textit{\large Corso di Laurea in Informatica}}\\[0.5cm] % Minor heading such as course title
+\begin{figure}[h]
+\includegraphics[scale=0.3]{/home/tonino/Desktop/Tesi/image/unibo.jpg}\centering
+\end{figure}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Studio e realizzazione}\\[0.4cm] % Title of your document
+{ \huge \bfseries di un'applicazione per il}\\[0.4cm] % Title of your document
+{ \huge \bfseries Marketing di prossimit\'a}\\[0.4cm] % Title of your document
+\HRule \\[0.6cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+	\begin{flushleft} \large
+		\emph{ \bfseries Relatore:} \\
+		Chiar.mo Prof. \\ Luciano \textsc{Bononi} % Supervisor's Name
+		\\[0.1cm] % Your name
+
+		\emph{ \bfseries Corelatore:} \\
+		Dott. Luca \textsc{Bedogni} % Supervisor's Name
+	\end{flushleft}
+
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+	\begin{flushright} \large
+		\emph{ \bfseries Candidato:}\\
+		Alessandro \textsc{Panipucci}\\[0.1cm]
+	\end{flushright}
+	\begin{flushright} \large
+	\end{flushright}
+	
+	\begin{flushright} 
+	\end{flushright}
+\end{minipage}\\[0.7cm]
+
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{ \large \bfseries \rom{2} {Sessione}\\
+\bfseries Anno Accademico 2014/2015}
+
+%{\large \today}\\[1cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+%{{\scshape\LARGE Introduzione \par}
+
+%\section{\scshape Introduzione }
+%\thispagestyle{plain}
+\pagestyle{fancy}
+\makeatletter
+\newcommand{\unchapter}[1]{%
+  \begingroup
+  \let\@makechapterhead\@gobble % make \@makechapterhead do nothing
+  \chapter{#1}
+  \endgroup
+}
+\makeatother
+\chapter*{Introduzione}
+\markboth{Introduzione}{}
+\addcontentsline{toc}{chapter}{Introduzione}
+\vspace{4em}
+
+
+Il marketing di prossimitá (proximity marketing) é una tecnica di marketing che opera su un'area geografica delimitata e precisa attraverso tecnologie di comunicazione di tipo visuale e mobile con lo scopo di promuovere la vendita di prodotti e servizi.\\[0.2cm]
+
+Questa tecnica di marketing non agisce su un target di utenti ben definito, bensí sugli individui che si trovano in una determinata area e siano in prossimitá di un dispositivo attraverso il quale sia possibile instaurare una comunicazione; si tratta quindi di una modalitá moderna della distribuzione di volantini pubblicitari cartacei che, trasformati in materiale digitale, possono diventare interattivi tramite gli apparati di proximity marketing più evoluti come il (RFID, NFC, QrCode, audio di prossimitá, motion capture, eye tracking, iBeacon).
+Il proximity marketing puó trovare applicazione in molti contesti, come ad esempio nei cinema (programmazione, trailer, messaggi pubblicitari), centri commerciali (buoni sconto, descrizione dei prodotti), negozi di giochi (giochi Java/Flash per cellulare), fiere (mappe degli stand, agenda degli eventi, business card dei relatori), concerti (suonerie, video musicali), tourist information access point (informazioni varie).\\[0.2cm]
+
+La tesi propone uno strumento che applica questo concetto ai
+viaggi turistici, mettendo a disposizione degli utenti dei percorsi, composti da obiettivi (le pietre miliari dell’itinerario) e creati da operatori convenzionati (quali aziende, associazioni o altri soggetti), al termine dei quali potranno essere vinti premi (sconti, omaggi, . . . ) se verrá data prova di aver attraversato gli obiettivi richiesti.
+Ai giorni d'oggi il mondo è dominato dagli smartphone e quindi l'importanza di una strategia che ne sfrutti le potenzialitá in questo senso é evidente, dato che essa puó essere in grado di “effettuare attivitá promozionali e informative al cliente che si trova vicino o all’interno del negozio nel momento in cui é disposto ad acquistare” \cite{rif1} e,inoltre, buone campagne di marketing di prossimitá possono valorizzare il brand aziendale e favorire sponsor e investimenti \cite{rif4}.\\[0.2cm]
+
+Lo scenario d'uso tipico riguarda specialmente chi seguirá il percorso come intrattenimento durante il proprio periodo di vacanza, incentivato dalla consapevolezza che al termine dell’itinerario otterrà un qualche forma di premio recandosi nel negozio dell'azienda, ma questo non é l’unico scenario possibile. Un operatore infatti puó creare i tragitti nel modo che preferisce, per esempio definendone uno che attraversa tutti i suoi negozi o un loro sottoinsieme oppure creare tragitti che percorrono tutta i monumenti di maggiore importanza della località e tra questi inserire il locale del tragitto dove poter ritirare il premio vinto.\\[0.2cm]
+
+L'applicazione permette di aumentare il bacino della propria clientela semplicemente creando un tragitto e mettendo in palio un premio, rendendone l'esperienza allo stesso tempo divertente ed economicamente vantaggiosa per il cliente. Infatti, come scrive Sciortino, “applicare strategie volte ad attrarre e fidelizzare un cliente/visitatore attraverso logiche ludiche in un contesto per sua natura non propriamente gaming, [ . . . ] porta il pubblico a cambiare il proprio atteggiamento da consumatore a protagonista della propria esperienza” \cite{rif5}.
+Ad oggi ci sono diverse applicazione con caratteristiche simili , discusse nel capitolo 1 , ma nessuna permette agli operatori di creare i propri percorsi totalmente personalizzati a cui associare precisi premi.
+
+\renewcommand*\contentsname{Indice}
+\tableofcontents
+
+\chapter{Stato dell'arte}
+
+Il marketing di prossimità non è un fenomeno totalmente nuovo, ma negli ultimi anni si sta affermando in modo deciso grazie ai progressi tecnologici.\\
+Descritto ampiamente nella tesi a opera di Negri \cite{rif1}, la sua importanza è anche testimoniata da un articolo \cite{rif4} che sottolinea come questa strategia possa valorizzare il brand aziendale, e da un altro \cite{rif3} che ne evidenzia l'efficacia di abbinare alla tecnica aspetti social.\\[0.2cm]
+
+Inoltre, uno studio sulla diffusione di applicazioni location-based in Croazia \cite{rif8} ha condotto delle interviste che mostrano come gli utenti utilizzino queste app per ottenere informazioni a loro rilevanti nel modo e tempo che più li aggrada e come la motivazione principale per cui ne fanno uso sia la possibilità di incontrare conoscenti vicini alla loro posizione.\\ 
+L’articolo sottolinea anche i vantaggi che ne traggono le aziende, grazie soprattutto al rapporto che riescono così a instaurare con i clienti, che non rappresenta un grosso investimento ma al contrario un’efficiente attività promozionale.\\
+Nell'uso di questa strategia sono però da tener presente le implicazioni legali: un articolo \cite{rif2} rileva che le tecnologie di geolocalizzazione permettono di delineare un profilo preciso delle abitudini di spostamento degli utenti, nonchè di averne sempre a disposizione la posizione corrente, invadendone così la privacy.
+Il testo chiarifica che le applicazioni più esposte a problemi legali sono quelle client-side, dato che quelle lato server non si interessano di identificare un utente particolare.\\
+L'articolo suggerisce di tutelarsi fornendo tutte le informazioni a riguardo negli User Agreements, di ottenere anticipatamente il consenso dell'utente a riguardo di queste pratiche e di garantire la sicurezza delle informazioni raccolte.\\[0.2cm]
+
+Altri articoli dimostrano gli effetti positivi che le applicazioni di marketing di prossimità portano alle aziende , infatti i grandi brand scelgono il marketing di prossimità in quando aumenta il tasso di conversione infatti come dice Nedim Bali, Marketing Manager di McDonald Turchia:\\
+“Noi di McDonald amiamo sorprendere e soddisfare i propri clienti, non solo attraverso un buon cibo e l’ottimo rapporto di qualità/prezzo ma anche, migliorando l’esperienza d’acquisto grazie all’utilizzo di nuove tecnologie”.\\
+I numeri parlano chiaro:
+McDonald ha aumentato del 20\% il suo tasso di conversione sfruttando la tecnologia di marketing di prossimità all’interno di 15 McCaffè situati ad Instambul, in Turchia. Il 30\% degli utenti che hanno ricevuto l’offerta l’hanno sfruttata più volte tornando spesso all’interno del punto vendita. Questi dati sono stati raccolti in tempo reale, nel momento in cui il consumatore ha eseguito l’azione: è anche per questo che i grandi brand scelgono il marketing di prossimità.\\
+Passiamo al caso Carrefour, un’azienda molto conosciuta nel settore della grande distribuzione o GDO, che come McDonald ha scelto la tecnologia di proximity marketing ottenendo dei risultati molto positivi. Il coinvolgimento degli utenti, all’interno del supermercato, è aumentato del 400\% grazie all’utilizzo di un’app mobile che ha alimentato le vendite e semplificato l’esperienza tra gli scaffali.\\[0.2cm]
+
+La tesi di Sciortino dedicata alla gamification \cite{rif5} sottolinea l’importanza della ludicizzazione nel marketing orientato al turismo e presenta diversi casi di studio, tra
+cui anche applicazioni mobili, il cui mondo `e presentato in modo approfondito nella dissertazione di Buresti \cite{rif7}.\\
+Nell'ultimo articolo sono citate alcune applicazioni riguardanti il marketing di prossimità , tra cui Foursquare (foursquare.com) che consiste nel mettere in competizione gli utenti di una certa città al fine di stilare una classifica di chi visita più luoghi della stessa e assegnare badge di riconoscimento a chi raggiunge determinati obiettivi.\\
+Con il lavoro descritto nella tesi ci sono alcune similitudini ,infatti in entrambe le applicazioni gli untenti deve visitare dei luoghi per vincere dei premi. 
+Ma la differenza tra le due app è che Foursquare non permette agli operatori di creare nè di percorsi nè di premi.\\
+Altre app famosissime sono TripAdvisor (tripadvisor.com) e Gogobot (gogobot.com). Entrambe aiutano nella pianificazione di viaggi turistici mettendo a disposizione recensioni e commenti di altri viaggiatori.\\
+Anche l'innovativa Freepie (freeppie.com) fa parte dell'elenco , quest'ultima concede agli utenti di usufruire di spazi invenduti gratuitamente (come camere o tavoli) degli operatori convenzionati in cambio di recensioni live sui sociali network , accumulando così punti utili per prenotare altre offerte inserite nell'applicazione.
+Queste offerte possono essere viste come i premi del lavoro proposto, mentre i punti necessari a ottenerli come gli obiettivi da raggiungere, ma le caratteristiche comuni terminano qui.\\
+Un’ulteriore app del settore non citata è Geocaching (geocaching.com), una specie di caccia al tesoro community-driven, dove i giocatori devono nascondere degli oggetti e indicare la loro posizione GPS affinchè altri possano trovarli.
+In questo caso gli aspetti simili riguardano solamente la geolocalizzazione e la visita di luoghi precisi.
+\chapter{Progettazione}
+
+\chapter{Implementazione}
+
+\chapter*{Conclusione}
+\markboth{Conclusione}{}
+\addcontentsline{toc}{chapter}{Conclusione}
+
+\begin{thebibliography}{100}
+\addcontentsline{toc}{chapter}{Bibliografia}
+\bibitem{rif1} Negri, S. ,\emph{ “Il Marketing Di Prossimit\'a”, Universit\'a degli studi di Pisa, 2015.}\\[0.2cm]
+\bibitem{rif2} DeLuca, K. (2015). , \emph{“Selling or Spying: The Legal Implications of Target Marketing
+Through Geolocation Technologies”, Law School Student Scholarship, Paper 656,
+2015, 2-28}\\[0.2cm]
+\bibitem{rif3} Tussyadiah, I. P., \emph{“A concept of location-based Social Network Marketing”, Journal
+of Travel Tourism Marketing, 29(3), 2012, 205-220.}\\[0.2cm]
+\bibitem{rif4} Haines, E.,\emph{ “The dos and don’ts of proximity marketing in sponsorship”, Journal of Sponsorship, 2(2), 2009, 113-119.}\\[0.2cm]
+\bibitem{rif5} Sciortino, F.S., \emph{“Gamification: uno strumento per il miglioramento della brand image di una citt`a e della sua attrattivit\'a turistica”, Universit\'a degli studi di Pisa, 2014.}\\[0.2cm]
+\bibitem{rif6} Di Pierdomenico , P. \emph{ Proximity Marketing per la promozione del territorio , \url{http://www.argoserv.it/proximity-marketing-promozione-del-territorio}}\\[0.2cm]
+\bibitem{rif7} Bucaresti, C., \emph{ “Applicazioni mobili in ambito turistico: stato dell’arte, tassonomia
+e valutazione di casi di studio”, Universit`a di Bologna, 2014.}\\[0.2cm]
+\bibitem{rif8} Ruzic, D., \emph{ Bilos, A., Kelic, I., “Development of mobile marketing in croatian tourism using location-based services”, Tourism and Hospitality Management, 2012, 151-159.}\\[0.2cm]
+
+\end{thebibliography}
+
+\begin{thesitography}{100}
+\addcontentsline{toc}{chapter}{Siti consultati}
+
+\bibitem{rif12}\url{http://www.linkedin.com/pulse/ibeacon-e-il-marketing-di-prossimit%C3%A0-carlo-finocchi?trk=seokp_posts_primary_cluster_res_title}
+
+\bibitem{rif13}\url{https://www.jointag.com/il-museo-digitale-il-connubio-perfetto-tra-passato-e-futuro/}
+
+\bibitem{rif14}\url{http://www.argoserv.it/proximity-marketing-promozione-del-territorio}
+
+\bibitem{rif15}\url{http://www.ninjamarketing.it/2015/01/13/quicon-il-marketing-di-prossimita-col-cliente-al-centro-intervista/}
+
+\end{thesitography}
+
+\end{document}
