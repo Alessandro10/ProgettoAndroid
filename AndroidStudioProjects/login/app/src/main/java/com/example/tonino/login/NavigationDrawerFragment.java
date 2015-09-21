@@ -88,11 +88,8 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(Salva.getAccountFB())
-            mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer_fb, container, false);
-        else
-            mDrawerListView = (ListView) inflater.inflate(
+
+        mDrawerListView = (ListView) inflater.inflate(
                     R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

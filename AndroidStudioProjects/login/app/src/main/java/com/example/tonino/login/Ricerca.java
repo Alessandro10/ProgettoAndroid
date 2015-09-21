@@ -44,8 +44,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import com.example.tonino.login.LoginActivity;
-
 public class Ricerca extends Fragment {
 
     boolean click = false;
@@ -1069,10 +1067,8 @@ public class Ricerca extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = null;
-        if(Salva.getAccountFB())
-            v = inflater.inflate(R.layout.activity_ricerca_fb, null, false);
-        else
-            v = inflater.inflate(R.layout.activity_ricerca, null, false);
+
+        v = inflater.inflate(R.layout.activity_ricerca, null, false);
 
         return v;
     }

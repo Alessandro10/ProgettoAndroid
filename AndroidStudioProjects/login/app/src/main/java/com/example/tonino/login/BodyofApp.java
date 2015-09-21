@@ -28,6 +28,7 @@ import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.SimpleFacebookConfiguration;
 import com.sromku.simple.fb.entities.Profile;
 import com.sromku.simple.fb.listeners.OnLoginListener;
+import com.sromku.simple.fb.listeners.OnLogoutListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Logger;
 import com.sromku.simple.fb.utils.Utils;
@@ -36,6 +37,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
@@ -73,6 +75,225 @@ public class BodyofApp extends ActionBarActivity
     private Button buttonFacebook;
 
     private FragmentActivity myContext = this;
+
+    private List<String> listapreferitiPercorsi = new ArrayList<String>();
+
+    // ----------------------------
+
+    private void okPuoiEntrare()
+    {
+        String user = Salva.getUsername();
+        Intent myIntent = new Intent(BodyofApp.this, BodyofApp.class);
+        myIntent.putExtra("username", user);
+        myIntent.putExtra("notifica", 0);
+        Salva.setNomeUtente(user);
+        startActivity(myIntent);
+        this.finish();
+    }
+
+    protected void sendJsonWithFB(final String idFb , final boolean new_account_fb
+            , final List<String> tipi , final HttpClient ClientVecchio) {
+
+        listapreferitiPercorsi =  Salva.getListaDeiTagsPreferiti();
+
+        myContext = this;
+        Thread t = new Thread() {
+
+            public void run() {
+                Looper.prepare(); //For Preparing Message Pool for the child Thread
+                HttpClient client;
+                if(new_account_fb) {
+                    Log.i("loginfb" , "NewClient");
+                    client = new DefaultHttpClient();
+                }
+                else
+                {
+                    Log.i("loginfb" , "ClientVecchio");
+                    //client = ClientVecchio;
+                    client = Salva.getHttpClient();
+                }
+                Salva.setHttClient(client);
+                HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
+                HttpResponse response;
+                JSONObject json = new JSONObject();
+
+                try {
+                    Data.setHttpclient(new DefaultHttpClient());
+
+                    if(new_account_fb) {
+                        HttpPost post;
+                        Log.i("loginfb" , "loginfb");
+                        post = new HttpPost(Data.getUrl() + "/loginfb");
+                        json.put("fb_id" , idFb);
+                        post.setHeader("user-agent", "app");
+                        post.setHeader("Accept", "application/json");
+                        StringEntity se = new StringEntity( json.toString());
+                        se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+                        post.setEntity(se);
+                        response = client.execute(post);
+                    }
+                    else
+                    {
+                        HttpPut post;
+                        Log.i("loginfb" , "loginfbElse");
+                        post = new HttpPut(Data.getUrl() + "/user/edit");
+                        Log.i("loginfb" , "loginfbElse1");
+                        JSONArray tags_array = new JSONArray();
+                        Iterator<String> iterator = tipi.iterator();
+                        while(iterator.hasNext())
+                        {
+                            String tipoDaMettere = iterator.next();
+                            tags_array.put(tipoDaMettere);
+                        }
+                        json.put("tags_to_add", tags_array);
+                        post.setHeader("user-agent", "app");
+                        post.setHeader("Accept", "application/json");
+                        StringEntity se = new StringEntity( json.toString());
+                        se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+                        post.setEntity(se);
+
+                        response = client.execute(post);
+
+                    }
+
+                    StatusLine statusLine = response.getStatusLine();
+                    int statusCode = statusLine.getStatusCode();
+
+                    Log.i("ok" , statusLine.toString());
+
+                    String title = "" , msg = "";
+                    final List<String> tipi_da_mettere = new ArrayList<String>();
+                    if(statusLine.getStatusCode() == 200)
+                    {
+                        if(new_account_fb) {
+                            String risposta = response.toString();
+                            JSONObject mainObject = null;
+                            JSONArray tipiConsigliati = null;
+                            List<String> ListTipi = new ArrayList<String>();
+                            int iD = 0;
+                            String result = EntityUtils.toString(response.getEntity());
+                            Log.i("resultFB" , result);
+                            try {
+                                int is_operator = 0;
+                                mainObject = new JSONObject(result);
+
+                                boolean new_user = (boolean) mainObject.getBoolean("new_user");
+                                //boolean new_user = new_account_fb;
+
+                                is_operator = mainObject.getInt("is_operator");
+
+                                Log.i("loginfb", " " + new_user);
+                                if (new_user) {
+                                    Log.i("loginfb", "new_user");
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
+                                    builder.setTitle("Preferenze");
+                                    List<String> list_items = listapreferitiPercorsi;
+                                    Log.i("loginfb", "size list " + list_items.size());
+                                    final String[] items = new String[list_items.size()];
+                                    int i = 0;
+                                    boolean[] bool = new boolean[list_items.size()];
+                                    Iterator<String> iterator = list_items.iterator();
+                                    while (iterator.hasNext()) {
+                                        String tipo = iterator.next();
+                                        items[i] = tipo;
+                                        bool[i] = false;
+                                        i++;
+                                    }
+                                    Log.i("loginfb", "fatto ");
+                                    builder.setMultiChoiceItems(items, bool,
+                                            new DialogInterface.OnMultiChoiceClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int indexSelected,
+                                                                    boolean isChecked) {
+                                                    Log.i("loginfb" , "-> " + items[indexSelected]);
+                                                    if (isChecked) {
+                                                        Log.i("loginfb" , "messo " + items[indexSelected]);
+                                                        tipi_da_mettere.add(items[indexSelected]);
+                                                    } else {
+                                                        Log.i("loginfb" , "tolto " + items[indexSelected]);
+                                                        tipi_da_mettere.remove(items[indexSelected]);
+                                                    }
+                                                }
+                                            })
+                                            // Set the action buttons
+                                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    //tipi_da_mettere.add(items[id]);
+                                                    Log.i("loginfb", "tipi " + tipi_da_mettere.size());
+
+                                                    sendJsonWithFB(idFb, false, tipi_da_mettere, ClientVecchio);
+
+                                                }
+                                            }).show();
+                                }
+                                else
+                                {
+
+                                    sendJsonWithFB(idFb, false, tipi, ClientVecchio);
+
+                                }
+                                if (new_account_fb) {
+                                    Log.i("loginfb", "sendJsonWithFB");
+                                    //sendJsonWithFB(idFb, false , tipi_da_mettere, ClientVecchio);
+                                } else {
+                                    //okPuoiEntrare();
+                                }
+                            } catch (Exception e) {
+                                Log.i("loginfb", "errore");
+                                e.printStackTrace();
+                            }
+                        }
+                        else
+                        {
+                            Log.i("loginfb" , "TipiNome");
+                            Iterator<String> iterator = tipi.iterator();
+                            while(iterator.hasNext())
+                            {
+                                String tiponome = iterator.next();
+                                Log.i("loginfb" , "tipoNome = " + tiponome);
+                            }
+
+                            Salva.setListaDeiTagsPreferiti(tipi);
+                            okPuoiEntrare();
+                        }
+                    }
+                    else
+                    {
+                        AlertDialog.Builder b = new AlertDialog.Builder(myContext);
+                        b.setCancelable(false);
+                        b.setTitle("ERRORE");
+                        b.setMessage("username e/o password sbagliate " + statusLine.getStatusCode());
+                        b.setNeutralButton("OK", new AlertDialog.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        b.create().show();
+
+                    }
+
+                    /*Checking response */
+                    if(response!=null){
+                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+                    }
+
+                } catch(Exception e) {
+                    e.printStackTrace();
+
+                }
+
+                Looper.loop(); //Loop in the message queue
+            }
+        };
+        t.start();
+    }
+
+    // ----------------------------
+
+
 
     protected void sendJson(final String username, final String pwd , final String idFb) {
         myContext = this;
@@ -191,33 +412,29 @@ public class BodyofApp extends ActionBarActivity
      * Login example.
      */
     private void setLogin() {
-        Log.i("idFb" , "SETLOGIN");
+
 
         // Login listener
         final OnLoginListener onLoginListener = new OnLoginListener() {
 
             @Override
             public void onFail(String reason) {
-                Log.i("idFb" , "FAIL");
-                //buttonFacebook.setText("Fail");
+
                 //mTextStatus.setText(reason);
                 //Log.w(TAG, "Failed to login");
             }
 
             @Override
             public void onException(Throwable throwable) {
-                Log.i("idFb" , "ERRORE");
-                //buttonFacebook.setText("exception");
+
                 //mTextStatus.setText("Exception: " + throwable.getMessage());
                 //Log.e(TAG, "Bad thing happened", throwable);
             }
 
-
-
             @Override
             public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
                 // change the state of the button or do whatever you want
-                Log.i("idFb" , "login");
+
                 mSimpleFacebook.getProfile(new OnProfileListener() {
                     @Override
                     public void onComplete(Profile profile) {
@@ -241,33 +458,17 @@ public class BodyofApp extends ActionBarActivity
                                 String sesso = profile.getGender();
                                 String website = profile.getWebsite();
                                 String link = profile.getLink();
-                                //buttonFacebook.setText(
-                                //" email " + email + " id " + id );
-                                /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(myContext);
+                                //buttonFacebook.setText(" email " + email + " id " + id );
 
-
-                                alertDialogBuilder.setTitle("HELP");
-
-                                alertDialogBuilder.setMessage(" idFb = " + id);
-
-
-                                alertDialogBuilder.setNeutralButton("OK",
-                                        new DialogInterface.OnClickListener() {
-
-                                            @Override
-                                            public void onClick(DialogInterface arg0, int arg1) {
-
-                                            }
-                                        });
-
-                                AlertDialog alertDialog = alertDialogBuilder.create();
-                                alertDialog.show();*/
-                                Log.i("idFb", " id = " + id);
-                                Salva.setIdFacebook(id);
-                                sendJson(Salva.getUsername() , Salva.getPassword() , Salva.getIdFacebook());
                                 //sendJson(email , id , 1);
-                                //Salva.setSimpleFacebook(mSimpleFacebook);
+                                Salva.setSimpleFacebook(mSimpleFacebook);
+                                Salva.setAccountFB(true);
 
+                                List<String> listadefalut = new ArrayList<String>();
+
+                                HttpClient client = new DefaultHttpClient();
+
+                                sendJsonWithFB(id , true , listadefalut , client);
                                /*final OnLogoutListener onLogoutListener = new OnLogoutListener() {
 
                                    @Override
@@ -297,18 +498,20 @@ public class BodyofApp extends ActionBarActivity
 
             @Override
             public void onCancel() {
-                Log.i("idFb" , "CANC");
-                //buttonFacebook.setText("cancel");
+
                 // mTextStatus.setText("Canceled");
                 //Log.w(TAG, "Canceled the login");
             }
 
 
+
         };
 
+        //SimpleFacebook mSimpleFacebook = Salva.getmSimpleFacebook();
         mSimpleFacebook.login(onLoginListener);
 
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -499,6 +702,19 @@ public class BodyofApp extends ActionBarActivity
             loginPrefsEditor.clear();
             loginPrefsEditor.commit();
             //autoEntra
+
+            if(mSimpleFacebook != null)
+            {
+                final OnLogoutListener onLogoutListener = new OnLogoutListener() {
+
+                    @Override
+                    public void onLogout() {
+
+                    }
+                };
+                mSimpleFacebook.logout(onLogoutListener);
+            }
+
             Intent myIntent = new Intent(BodyofApp.this, MainActivity.class);
             myIntent.putExtra("autoEntra" , false);
             startActivity(myIntent);

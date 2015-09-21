@@ -1,7 +1,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sfondo"
+    android:background="@drawable/sfondodrawable"
     android:paddingLeft="6dp"
     android:paddingRight="6dp"
     android:paddingBottom="6dp"

@@ -1041,10 +1041,8 @@ public class Consigliati extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = null;
-        if(Salva.getAccountFB())
-            v = inflater.inflate(R.layout.activity_consigliati_fb, null, false);
-        else
-            v = inflater.inflate(R.layout.activity_consigliati, null, false);
+
+        v = inflater.inflate(R.layout.activity_consigliati, null, false);
         return v;
     }
 

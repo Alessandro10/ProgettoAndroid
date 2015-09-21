@@ -1255,10 +1255,7 @@ public class Vicinanza extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = null;
-        if(Salva.getAccountFB())
-            v = inflater.inflate(R.layout.activity_vicinanza_fb, null, false);
-        else
-            v = inflater.inflate(R.layout.activity_vicinanza, null, false);
+        v = inflater.inflate(R.layout.activity_vicinanza, null, false);
 
         // v = inflater.inflate(R.layout.activity_vicinanza, null, false);
         return v;

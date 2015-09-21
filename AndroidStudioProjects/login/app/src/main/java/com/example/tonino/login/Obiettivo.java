@@ -702,10 +702,8 @@ public class Obiettivo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = null;
-        if(Salva.getAccountFB())
-            v = inflater.inflate(R.layout.fragment_obiettivo_fb, null, false);
-        else
-            v = inflater.inflate(R.layout.fragment_obiettivo, null, false);
+
+        v = inflater.inflate(R.layout.fragment_obiettivo, null, false);
         return v;
     }
 

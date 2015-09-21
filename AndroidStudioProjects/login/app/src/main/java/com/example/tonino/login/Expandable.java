@@ -325,13 +325,17 @@ public class Expandable {
                         public void onClick(DialogInterface arg0, int arg1) {
 
                             SimpleFacebook mSimpleFacebook = Salva.getmSimpleFacebook();
+
+
+
+
                             final Feed feed = new Feed.Builder()
-                                    .setMessage("Clone it out...")
-                                    .setName("Simple Android Example")
+                            .setMessage("Ha vinto il premio!!!Usa anche tu la magnifica app DiscountWalk")
+                                    .setName("DiscountWalk")
                                     .setCaption("Code less, do the same.")
-                                    .setDescription("Esempio DiscountWalk")
-                                    //.setPicture("https://raw.githubusercontent.com/wiki/sromku/android-simple-facebook/images/android_facebook_sdk_logo.png")
-                                    .setLink("https://www.google.com")
+                                    .setDescription("Ha vinto un grande premio!!! Usa anche tu la magnifica app DiscountWalk!")
+                                    .setLink("http://daniele.cortesi2.web.cs.unibo.it/wsgi/routes")
+                                    .setPicture("https://raw.githubusercontent.com/Alessandro10/ProgettoAndroid/master/Desktop/applogo200X200.png")
                                     .build();
 
                             SimpleFacebook.getInstance().publish(feed, true, new OnPublishListener() {

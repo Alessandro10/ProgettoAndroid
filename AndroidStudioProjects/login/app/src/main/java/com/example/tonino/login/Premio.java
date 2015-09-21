@@ -785,10 +785,7 @@ public class Premio extends Fragment {
                              Bundle savedInstanceState) {
         //mIntentFilter = new IntentFilter();
         View v = null;
-        if(Salva.getAccountFB())
-            v = inflater.inflate(R.layout.fragment_premio_fb, null, false);
-        else
-            v = inflater.inflate(R.layout.fragment_premio, null, false);
+        v = inflater.inflate(R.layout.fragment_premio, null, false);
         return v;
     }
 }

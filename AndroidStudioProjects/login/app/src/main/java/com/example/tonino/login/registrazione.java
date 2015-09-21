@@ -43,7 +43,6 @@ import java.util.regex.Pattern;
 
 public class registrazione extends ActionBarActivity {
 
-
     List<String> listapreferiti = new ArrayList<String>();
     Boolean us1 = false, passw_sec = false;
     Button btn = null;

@@ -41,11 +41,11 @@
 
     <!--Dani-->
 
-    <string name="title_routes">My routes</string>
-    <string name="title_prizes">My prizes</string>
-    <string name="title_verify">Validate won prize</string>
-    <string name="title_profile">My profile</string>
-    <string name="title_logout">Log out</string>
+    <string name="title_routes">Percorsi</string>
+    <string name="title_prizes">Premi</string>
+    <string name="title_verify">Valida Premio</string>
+    <string name="title_profile">Profilo</string>
+    <string name="title_logout">Logout</string>
 
     <string name="shared_preferences_key">shared_pref</string>
     <string name="saved_username">username</string>

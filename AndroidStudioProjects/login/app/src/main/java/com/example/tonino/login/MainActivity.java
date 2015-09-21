@@ -34,7 +34,6 @@ import com.example.tonino.login.Types.Operator;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.ProfileTracker;
-import com.facebook.internal.CallbackManagerImpl;
 import com.facebook.login.DefaultAudience;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,7 +42,6 @@ import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.SimpleFacebookConfiguration;
 import com.sromku.simple.fb.entities.Profile;
 import com.sromku.simple.fb.listeners.OnLoginListener;
-import com.sromku.simple.fb.listeners.OnLogoutListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
 import com.sromku.simple.fb.utils.Logger;
 import com.sromku.simple.fb.utils.Utils;
@@ -84,6 +82,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private FragmentActivity myContext;
 
+    private int tipo_utente = 0;
+
 
     // --------------------Parte Dani INIZIO------------------------------------------
 
@@ -110,7 +110,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected DialogBroadcastReceiver dialogBroadcastReceiver;
 
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
         if (AccessToken.getCurrentAccessToken() != null) {
@@ -145,7 +145,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         if (dialogBroadcastReceiver != null) {
             dialogBroadcastReceiver.unregisterForReceive(this);
         }
-    }
+    }*/
 
 
     public void hideKeyboard() {
@@ -360,10 +360,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         mSimpleFacebook.onActivityResult(requestCode, resultCode, data);
         //Dani
 
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && !operatore) {
+        //callbackManager.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && tipo_utente == 1) {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
             Log.i("RESULT_OK" , "ok");
             if (requestCode == REGISTER_REQUEST_CODE || requestCode == EDIT_OPERATOR_CODE) {
+
                 Operator operator = data.getParcelableExtra(RegisterActivity.ARG_OUT_OPERATOR);
                 //usernameView.setText(operator.id);
                 //passwordView.setText(operator.psw);
@@ -434,7 +436,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                         String result = EntityUtils.toString(response.getEntity());
                         Log.i("risposta" , result);
 
-                        int tipo_utente = 0;
+
 
                         try {
                             mainObject = new JSONObject(result);
@@ -501,6 +503,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     protected void sendJsonWithFB(final String idFb , final boolean new_account_fb
             , final List<String> tipi , final HttpClient ClientVecchio) {
+
         myContext = this;
         Thread t = new Thread() {
 
@@ -578,10 +581,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                             List<String> ListTipi = new ArrayList<String>();
                             int iD = 0;
                             String result = EntityUtils.toString(response.getEntity());
+                            Log.i("resultFB" , result);
                             try {
+                                int is_operator = 0;
                                 mainObject = new JSONObject(result);
                                 boolean new_user = (boolean) mainObject.getBoolean("new_user");
                                 //boolean new_user = new_account_fb;
+
+                                is_operator = mainObject.getInt("is_operator");
 
                                 Log.i("loginfb", " " + new_user);
                                 if (new_user) {
@@ -630,8 +637,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 }
                                 else
                                 {
-                                    Salva.setUsername(username);
-                                    sendJsonWithFB(idFb, false, tipi, ClientVecchio);
+                                    if(is_operator == 1)
+                                    {
+                                        loginFB(idFb);
+                                    }
+                                    else {
+                                        Salva.setUsername(username);
+                                        sendJsonWithFB(idFb, false, tipi, ClientVecchio);
+                                    }
                                 }
                                 if (new_account_fb) {
                                     Log.i("loginfb", "sendJsonWithFB");
@@ -653,6 +666,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 String tiponome = iterator.next();
                                 Log.i("loginfb" , "tipoNome = " + tiponome);
                             }
+
                             Salva.setListaDeiTagsPreferiti(tipi);
                             okPuoiEntrare();
                         }
@@ -844,14 +858,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                HttpClient client = new DefaultHttpClient();
 
                                sendJsonWithFB(id , true , listadefalut , client);
-                               final OnLogoutListener onLogoutListener = new OnLogoutListener() {
+                               /*final OnLogoutListener onLogoutListener = new OnLogoutListener() {
 
                                    @Override
                                    public void onLogout() {
 
                                    }
                                };
-                               mSimpleFacebook.logout(onLogoutListener);
+                               mSimpleFacebook.logout(onLogoutListener);*/
                            }
                        });
 
@@ -983,28 +997,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
-        Button btnGeo = (Button) findViewById(R.id.geo_coder);
-        btnGeo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this , geo_coder_example.class);
-                startActivity(intent);
-            }
-        });
 
 
-        final Button btnDani = (Button) findViewById(R.id.Dani);
 
-        btnDani.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View arg0) {
 
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
-            }
-
-        });
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
